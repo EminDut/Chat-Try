@@ -19,7 +19,7 @@ export default function TouchableLogin(props) {
         borderColor: 'darkblue',
         padding: 8,
       }}>
-      <Text style={{left: 14,}}>Giriş Yap</Text>
+      <Text style={{left: 14}}>Giriş Yap</Text>
     </TouchableOpacity>
   );
 }
