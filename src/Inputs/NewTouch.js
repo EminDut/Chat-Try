@@ -5,16 +5,16 @@ import {
   Text,
   KeyboardAvoidingView,
   TouchableOpacity,
+  Alert,
 } from 'react-native';
 import React, {useState} from 'react';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import {
-  widthPercentageToDP as wp,
-  heightPercentageToDP as hp,
-} from 'react-native-responsive-screen';
+import { widthPercentageToDP as wp, heightPercentageToDP as hp,} from 'react-native-responsive-screen';
 import {useNavigation} from '@react-navigation/native';
 import KeyboardControl from './KeyboardControl';
 import auth from '@react-native-firebase/auth';
+import PasswordStrengthMeterBar from 'react-native-password-strength-meter-bar';
+
 
 export default function NewTouch(props) {
   const navigation = useNavigation();
@@ -25,15 +25,17 @@ export default function NewTouch(props) {
 
   const handleRegister = () => {
     auth()
-      .createUserWithEmailAndPassword(email, password)
-      .then(userCredential => {
-        console.log(userCredential)
-        // Yeni kullanıcı başarıyla kaydedildi
-        const user = userCredential.user;
-        console.log('Yeni kullanıcı oluşturuldu:', user);
-      })
-      .catch(error => {
-        console.error('Kayıt olma hatası:', error);
+    .createUserWithEmailAndPassword(email, password)
+    .then(userCredential => {
+      const user = userCredential.user;
+      console.log('Yeni kullanıcı oluşturuldu:', user);
+      Alert.alert("Kayıt Başarılı","kullanıcı başarıyla kaydoldu")
+      setEmail("");
+      setPassword("");
+    })
+    .catch(error => {
+      
+      Alert.alert('Kayıt olma hatası', 'Kayıt olma işlemi başarısız oldu. Lütfen tekrar deneyin.');
       });
   };
 
@@ -69,6 +71,7 @@ export default function NewTouch(props) {
               placeholder={props.placeholder1}
               onChangeText={text => setEmail(text)}
               value={email}
+              
             />
 
             <TextInput
@@ -76,20 +79,24 @@ export default function NewTouch(props) {
               placeholder={props.placeholder2}
               onChangeText={text => setPassword(text)}
               value={password}
+              secureTextEntry = {true}
             />
+            <View style={Styles.pass}>
+            <PasswordStrengthMeterBar password={password} />
+            </View>
 
             <TouchableOpacity
               style={{
                 marginTop: 40,
                 marginLeft: 85,
-                width: 85,
-                height: 50,
+                width : wp(20),
+                height: hp(6),
                 borderRadius: 10,
                 borderWidth: 1,
                 borderColor: 'black',
               }}
               onPress={handleRegister}>
-              <Text style={{marginLeft: 10, marginTop: 12}}>
+              <Text style={{marginLeft: 12, marginTop: 13}}>
                 {props.buttonText}
               </Text>
             </TouchableOpacity>
@@ -174,9 +181,17 @@ const Styles = StyleSheet.create({
   textnone: {
     left: 30,
     top: 15,
-    fontSize: 13,
+    fontSize: 15,
   },
   viewflex: {
     flex: 6,
   },
+  pass : {
+    top:25,
+    width: wp(65),
+    height: hp(3),
+    borderRadius: 5,
+
+
+  }
 });

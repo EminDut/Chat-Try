@@ -1,17 +1,12 @@
 import {TextInput} from 'react-native';
-import React,{useState} from 'react';
+import React, {useState} from 'react';
 
-export default function InputUser({user,setUser}) {
+export default function InputUser({user, setUser}) {
   return (
-
-    
     <TextInput
       placeholder="Kullanıcı Adı"
-      onChangeText={(text)=>setUser(text)}
+      onChangeText={text => setUser(text)}
       value={user}
-
-
-
       style={{
         width: 240,
         height: 50,
@@ -21,8 +16,7 @@ export default function InputUser({user,setUser}) {
         padding: 15,
         marginBottom: 15,
         paddingRight: 30,
-      }}/>
-
-    
+      }}
+    />
   );
 }
