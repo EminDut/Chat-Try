@@ -19,7 +19,7 @@ function HomeScreen() {
     );
   }
 
-  
+  <View></View>
 
 
   export default HomeScreen;
