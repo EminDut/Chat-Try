@@ -23,7 +23,9 @@ function LoginScreen() {
   const handleLogin = async () => {
     try {
       if(user.length > 3 && password.length >= 8){
-        await auth().signInWithEmailAndPassword(user, password);
+        await 
+        auth()
+        .signInWithEmailAndPassword(user, password);
         navigation.navigate('HomeScreen');
       }
       else{

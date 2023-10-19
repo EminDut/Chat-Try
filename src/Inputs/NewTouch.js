@@ -22,16 +22,26 @@ export default function NewTouch(props) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-
+  const isPasswordStrong = /^(?=.*[A-Z])(?=.*\d)(?=.*\W)[a-zA-Z0-9\S]{8,}$/.test(password);
+  
   const handleRegister = () => {
-    auth()
+
+   if (!isPasswordStrong) {
+    Alert.alert(
+      'Şifre Zayıf',
+      'Şifreniz zorluk kriterlerini karşılamıyor. Daha güçlü bir şifre seçin.'
+    );
+    return;
+  }
+
+  auth()
     .createUserWithEmailAndPassword(email, password)
     .then(userCredential => {
       const user = userCredential.user;
       console.log('Yeni kullanıcı oluşturuldu:', user);
-      Alert.alert("Kayıt Başarılı","kullanıcı başarıyla kaydoldu")
-      setEmail("");
-      setPassword("");
+      Alert.alert('Kayıt Başarılı', 'Kullanıcı başarıyla kaydoldu');
+      setEmail('');
+      setPassword('');
     })
     .catch(error => {
       
@@ -42,6 +52,8 @@ export default function NewTouch(props) {
   const handleNavigate = () => {
     navigation.navigate('NewAccoundTryScreen');
   };
+
+  
 
   return (
     <KeyboardControl>
@@ -85,6 +97,10 @@ export default function NewTouch(props) {
             <PasswordStrengthMeterBar password={password} />
             </View>
 
+            
+
+
+
             <TouchableOpacity
               style={{
                 marginTop: 40,
@@ -96,9 +112,12 @@ export default function NewTouch(props) {
                 borderColor: 'black',
               }}
               onPress={handleRegister}>
+             
+
               <Text style={{marginLeft: 12, marginTop: 13}}>
                 {props.buttonText}
               </Text>
+
             </TouchableOpacity>
           </KeyboardAvoidingView>
         </View>
