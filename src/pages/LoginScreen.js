@@ -20,24 +20,36 @@ function LoginScreen() {
 
   // const [message, setMessage] = useState('');
 
+  // const handleLogin = async () => {
+  //   try {
+  //     if(user.length > 3 && password.length >= 8){
+  //       await 
+  //       auth()
+  //       .signInWithEmailAndPassword(user, password);
+  //       navigation.navigate('HomeScreen');
+  //     }
+  //     else{
+  //       Alert.alert(' Kullanıcı adı ve şifre boş geçilemez.')
+  //     }
+  //   } catch (error) {
+  //     console.log(error);
+  //     // setMessage(error.message);
+  //     Alert.alert(
+  //       'Kullanıcı Adı veya Şifre yanlış, lütfen tekrar deneyiniz...',
+  //     );
+      
+  //     setUser("");
+  //     setPassword("");
+  //   }
+  // };
   const handleLogin = async () => {
     try {
-      if(user.length > 3 && password.length >= 8){
-        await 
-        auth()
-        .signInWithEmailAndPassword(user, password);
-        navigation.navigate('HomeScreen');
-      }
-      else{
-        Alert.alert(' Kullanıcı adı ve şifre boş geçilemez.')
-      }
+      navigation.navigate('HomeScreen');
     } catch (error) {
       console.log(error);
-      // setMessage(error.message);
       Alert.alert(
         'Kullanıcı Adı veya Şifre yanlış, lütfen tekrar deneyiniz...',
       );
-      
       setUser("");
       setPassword("");
     }

@@ -1,9 +1,10 @@
 import React from 'react';
+import {KeyboardAvoidingView} from "react-native";
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+
 import LoginScreen from './LoginScreen';
 import HomeScreen from './HomeScreen';
 import SearchScreen from './SearchScreen';
@@ -19,7 +20,11 @@ const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 
 const Router = () => {
+
   return (
+    <KeyboardAvoidingView
+    behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+    style={{flex:1}}>
     <NavigationContainer>
       <Stack.Navigator
         initialRouteName="login"
@@ -99,6 +104,8 @@ const Router = () => {
         </Stack.Screen>
       </Stack.Navigator>
     </NavigationContainer>
+    </KeyboardAvoidingView>
+ 
   );
 };
 
